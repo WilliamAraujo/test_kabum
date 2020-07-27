@@ -10,7 +10,7 @@ This application was tested in UBUNTU 18.04 LTS
 * PIP \
 ```sudo apt-get install python3-pip```
 
-#### Procudure to install
+#### Procedure to install
 * Clone repository \
 ``` git clone https://github.com/WilliamAraujo/test_kabum.git  ```
 * Open test_kabum folder  
@@ -21,6 +21,9 @@ This application was tested in UBUNTU 18.04 LTS
 ``` source venv/bin/activate ```
 * Install requirements.txt \
 ``` pip install -r  requirements.txt ```
+
+#### Execute app Flask
+``` python3 app.py run server  ```
 
 #### Contact
 William Roberto de Araujo \
