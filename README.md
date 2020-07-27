@@ -22,7 +22,7 @@ This application was tested in UBUNTU 18.04 LTS
 * Install requirements.txt \
 ``` pip install -r  requirements.txt ```
 
-#### Execute app Flask
+#### For execute application
 ``` python3 app.py run server  ```
 
 #### Contact
