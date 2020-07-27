@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_restful import Api
+from time import sleep
 from utils.process import Process
 from models.product import ProductModel
 from resources.product import Products, Product
@@ -17,28 +18,29 @@ def create_database():
     if not os.path.exists('./database.db'):
         print("Create a database\n")
         database.create_all()
+        sleep(0.1)
 
-    file_name = "produtos_79936.json"
+    file_name = "products_79936.json"
     if not os.path.exists(file_name):
-        print("Download of mock database\n")
+        # Download of mock database
         Process.run('curl https://servicespub.prod.api.aws.grupokabum.com.br/descricao/v1/descricao/produto/79936 >> %s' % file_name)
 
-    print("Save database")
+    ## Save database ##
     # Read $filename
     config_file = './%s' % file_name
     config_helper = ConfigHelper(config_file)
     config = config_helper.load_config()
 
-    # Read only 'produtos'
+    # Read only products of config
     config = config['familia']['produtos']
     for data in config:
-        print("data: {}\n\n".format(data))
         product = ProductModel(**data)
         try:
+            # Save products in database
             product.save_product()
+            sleep(0.01)
         except:
-            print({"message": "An error ocurred trying to create 'produto'."}, 500)  # Internal Server Error
-        print(product.json(), 201)
+            print({"message": "An error ocurred trying to create product."}, 500)  # Internal Server Error
 
 api.add_resource(Products, '/produto')
 api.add_resource(Product, '/produto/<int:codigo>')
